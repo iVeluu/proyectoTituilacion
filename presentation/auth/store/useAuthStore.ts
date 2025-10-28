@@ -11,11 +11,13 @@ export interface AuthState {
   login: (email: string, password: string) => Promise<boolean>;
   checkStatus: () => Promise<void>;
   logout: () => Promise<void>;
+  setStatusToAuthenticated: () => void;
+  setStatusToUnauthenticated: () => void;
 }
 
 export const useAuthStore = create<AuthState>()((set, get) => ({
   //Properties
-  status: "checking",
+  status: "unauthenticated",
   token: undefined,
   user: undefined,
 
@@ -29,6 +31,13 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
   },
 
   logout: async () => {
-    //TODO: 
+    //TODO:
+  },
+  setStatusToAuthenticated: () => {
+    set({ status: 'authenticated'})    
+  },
+  
+  setStatusToUnauthenticated: () => {
+    set({ status: 'unauthenticated'})    
   },
 }));
